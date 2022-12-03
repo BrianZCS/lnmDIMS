@@ -24,6 +24,7 @@ make_alphas <- function(n_timepoints, intervals, signal_size) {
 #' @param n_timepoints number of time points
 #' @return configurations the configurations used in the power test
 #' @export
+#' @importFrom rlist cross
 make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_timepoints = NULL) {
   if (is.null(intervals)) {
     intervals <- c(5, 8, 14, 18)
@@ -49,9 +50,10 @@ make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_
 #' @param n_timepoints number of time points
 #' @return configurations the configurations used in the power test
 #' @export
+#' @importFrom rlist cross
 make_configurations_clust <- function(ns, n_depth, n_timepoints) {
   
-  configurations <- rlist::cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
+  configurations <- cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
   
   configurations
 }
