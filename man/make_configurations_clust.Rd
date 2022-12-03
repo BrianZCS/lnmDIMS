@@ -4,18 +4,18 @@
 \alias{make_configurations_clust}
 \title{configurations generator for clust}
 \usage{
-make_configurations_clust(ns, n_depth, ts_matrix, n_timepoints)
+make_configurations_clust(ns, n_depth, n_timepoints)
 }
 \arguments{
 \item{ns}{the number of samples}
 
 \item{n_depth}{sequence depth}
 
-\item{ts_matrix}{transition matrix}
-
 \item{n_timepoints}{number of time points}
 
 \item{alpha}{the maximum perturbation intensity (between 0 and 1)}
+
+\item{ts_matrix}{transition matrix}
 }
 \value{
 configurations the configurations used in the power test

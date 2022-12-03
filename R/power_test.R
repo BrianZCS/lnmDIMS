@@ -53,7 +53,7 @@ make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_
 #' @export
 make_configurations_clust <- function(ns, n_depth, n_timepoints) {
   
-  configurations <- cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
+  configurations <- cross(list(n = ns, n_depth = n_depth, n_timepoints = n_timepoints))
   
   configurations
 }
@@ -107,7 +107,7 @@ power_matrix_transform_perturb = function(matrix){
   }
   for(i in 1:length(configurations)){
     stat$n[i] = configurations[[i]]$n
-    stat$seq_depth[i] = configurations[[i]]$seq_depth
+    stat$n_depth[i] = configurations[[i]]$n_depth
     stat$alpha[i] = max(configurations[[i]]$alpha) ##signal_size, need to be changed if the graph changed.
   }
   pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")
@@ -125,7 +125,7 @@ power_matrix_transform_perturb = function(matrix){
 #' @return  power statistics
 #' @export
 estimate_power_perturb <-
-  function(config,
+  function(configurations,
            centroids,
            n_reps,
            simulator,
@@ -170,15 +170,15 @@ estimate_power_perturb <-
 #' calculate the powers
 #'
 #' The function calculates the statistics of power test
-#' @param config configurations
+#' @param configurations configurations
 #' @param n_reps number of repetitions
 #' @param simulator simulator we use
 #' @param ts_matrix transition matrix
-#' @param initial_state
+#' @param initial_state initial state
 #' @param centers centroid of cluster
 #' @return  power statistics
 #' @export
-estimate_power_clust <- function(config, n_reps, simulator, ts_matrix, inital_state, centers){
+estimate_power_clust <- function(configurations, n_reps, simulator, ts_matrix, inital_state, centers){
   n_species = ncol(centers)+1
   n_clust = nrow(centers)
   statistics = matrix(nrow = length(configurations), ncol = length(n_reps))
@@ -190,9 +190,9 @@ estimate_power_clust <- function(config, n_reps, simulator, ts_matrix, inital_st
         diff<-vector()
         for (k in 1:configurations[[i]]$n){
           samples = data.frame()
-          samples = simulator(n_sample=1, n_species=n_species, n_depth=configurations[[i]]$seq_depth,ts_matrix=ts_matrix, n_timepoints=configurations[[i]]$n_timepoints, initial_state=inital_state, centers = centers)
+          samples = simulator(n_sample=1, n_species=n_species, n_depth=configurations[[i]]$n_depth,ts_matrix=ts_matrix, n_timepoints=configurations[[i]]$n_timepoints, initial_state=inital_state, centers = centers)
           samples<-as.matrix(samples)
-          sample_list <- list(n_species = n_species-1, seq_depth=configurations[[i]]$seq_depth, n_steps = configurations[[i]]$n_timepoints, n_clust = n_clust, y = samples, n_person = 1)
+          sample_list <- list(n_species = n_species-1, n_depth=configurations[[i]]$n_depth, n_steps = configurations[[i]]$n_timepoints, n_clust = n_clust, y = samples, n_person = 1)
           result=cal_fit(sample_list)
           diff[k]=mean(result$matrix-ts_matrix)^2
         }
@@ -217,7 +217,7 @@ power_matrix_transform_clust = function(matrix){
   }
   for(i in 1:length(configurations)){
     stat$n[i] = configurations[[i]]$n
-    stat$seq_depth[i] = configurations[[i]]$seq_depth
+    stat$n_depth[i] = configurations[[i]]$n_depth
     stat$timepoint[i] = configurations[[i]]$n_timepoints ##signal_size, need to be changed if the graph changed.
   }
   pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")

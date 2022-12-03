@@ -5,7 +5,7 @@
 \title{calculate the powers}
 \usage{
 estimate_power_clust(
-  config,
+  configurations,
   n_reps,
   simulator,
   ts_matrix,
@@ -14,7 +14,7 @@ estimate_power_clust(
 )
 }
 \arguments{
-\item{config}{configurations}
+\item{configurations}{configurations}
 
 \item{n_reps}{number of repetitions}
 
@@ -23,6 +23,8 @@ estimate_power_clust(
 \item{ts_matrix}{transition matrix}
 
 \item{centers}{centroid of cluster}
+
+\item{initial_state}{initial state}
 }
 \value{
 power statistics

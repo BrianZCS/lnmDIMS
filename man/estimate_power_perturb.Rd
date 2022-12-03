@@ -5,7 +5,7 @@
 \title{calculate the powers}
 \usage{
 estimate_power_perturb(
-  config,
+  configurations,
   centroids,
   n_reps,
   simulator,
@@ -14,8 +14,6 @@ estimate_power_perturb(
 )
 }
 \arguments{
-\item{config}{configurations}
-
 \item{centroids}{centroids of the cluster}
 
 \item{n_reps}{number of repetitions}
@@ -25,6 +23,8 @@ estimate_power_perturb(
 \item{sig_level}{significance level}
 
 \item{sim_opts}{true perturbed species}
+
+\item{config}{configurations}
 }
 \value{
 power statistics
