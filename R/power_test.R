@@ -66,7 +66,7 @@ make_configurations_clust <- function(ns, n_depth, n_timepoints) {
 #' @return  fitted centroids (beta)
 #' @export
 get_centroids <- function(data_list){
-  result = model_fit(data_list)
+  result = cal_fit_perturbation(data_list)
   result$beta
 }
 
