@@ -3,5 +3,5 @@
 ```
 #install.packages("devtools")
 
-devtools::install_github("BrianZCS/lmmDIMS")
+devtools::install_github("BrianZCS/lnmDIMS")
 ```
