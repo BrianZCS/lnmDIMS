@@ -21,4 +21,15 @@ Imports:
   MASS,
   MCMCpack,
   tidybayes
+Depends:
+	rlist,
+	compositions,
+  tidyverse,
+  markovchain,
+  MCMCpack,
+  dplyr,
+  cmdstanr,
+  MASS,
+  MCMCpack,
+  tidybayes
 
