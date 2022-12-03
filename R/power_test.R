@@ -32,7 +32,7 @@ make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_
   if (is.null(n_timepoints)) {
     n_timepoints <- 20
   }
-  configurations <- rlist::cross(list(n = ns, n_depth = n_depth, alpha = alpha))
+  configurations <- cross(list(n = ns, n_depth = n_depth, alpha = alpha))
   for (i in seq_along(configurations)) {
     configurations[[i]][["alpha"]] <- make_alphas(n_timepoints, intervals, configurations[[i]][["alpha"]]) %>%
       round(3)
@@ -53,7 +53,7 @@ make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_
 #' @export
 make_configurations_clust <- function(ns, n_depth, n_timepoints) {
   
-  configurations <- rlist::cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
+  configurations <- cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
   
   configurations
 }
