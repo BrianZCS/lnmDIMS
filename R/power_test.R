@@ -49,9 +49,9 @@ make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_
 #' @param n_timepoints number of time points
 #' @return configurations the configurations used in the power test
 #' @export
-make_configurations_clust <- function(ns, n_depth,ts_matrix, n_timepoints) {
+make_configurations_clust <- function(ns, n_depth, n_timepoints) {
   
-  configurations <- cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
+  configurations <- rlist::cross(list(n = ns, seq_depth = seq_depth, n_timepoints = n_timepoints))
   
   configurations
 }
