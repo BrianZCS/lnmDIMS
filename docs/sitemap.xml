@@ -4,6 +4,18 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/Casestudy.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/lnmDIMS.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Powertest.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -19,6 +31,12 @@
     <loc>/reference/estimate_power_perturb.html</loc>
   </url>
   <url>
+    <loc>/reference/estimate_stat_mult.html</loc>
+  </url>
+  <url>
+    <loc>/reference/estimate_transitions.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_centroids.html</loc>
   </url>
   <url>
@@ -29,6 +47,9 @@
   </url>
   <url>
     <loc>/reference/make_configurations_clust.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_configurations_mult.html</loc>
   </url>
   <url>
     <loc>/reference/make_configurations_perturb.html</loc>
@@ -47,6 +68,12 @@
   </url>
   <url>
     <loc>/reference/relative_abundence.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_clust.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_clust_multinomial.html</loc>
   </url>
   <url>
     <loc>/reference/sim_clust_obs.html</loc>

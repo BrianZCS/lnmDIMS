@@ -7,8 +7,7 @@ library(lnmDIMS)
 
 
 #build("lnmDIMS")
-#library(pkgdown)
-#
-#build_site("lnmDIMS")
-# use_vignette("lnmDIMS")
-## changed
+library(pkgdown)
+build_site("lnmDIMS")
+#use_vignette("lnmDIMS")
+build_vignettes()

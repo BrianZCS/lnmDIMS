@@ -40,7 +40,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="articles/lnmDIMS.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/Casestudy.html">Mutinomial Model Case Study</a>
+    </li>
+    <li>
+      <a href="articles/Powertest.html">Mutinomial Model Power Test</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -55,13 +73,20 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div class="section level1">
 <div class="page-header"><h1 id="lnmdims">lnmDIMS<a class="anchor" aria-label="anchor" href="#lnmdims"></a>
 </h1></div>
+<p>To compare potential longitudinal sampling strategies, it is valuable and cost-efficient to simulate hypothetical experimental data and imagine their subsequent analysis results. Packages supporting such power analysis have been published, drawing from various models of longitudinal microbiome data. However, though it would be useful to calibrate these simulators based on available pilot data, there are no existing packages that support this. In addition, specifying model parameters can be difficult, especially in the absence of prior knowledge. However, most of the simulators do not contain functions that allow users to generate data with estimated model parameters obtained from data fitting. To improve the features, we propose a package that applies a logistic multinomial model to simulate longitudinal microbiome count data. Based on the model, we extended our simulations to two practical experiment designs in microbiome studies, one investigating the effect of certain perturbations on the microbiome, and the other modeling the transitions of dominant microbiome clusters. Our simulator allows users to generate data from scratch with default parameters or to estimate reasonable defaults using pilot data. To help with experimental design, we create functions for power analysis and provide visualizations to help determine the optimal experimental conditions.</p>
+</div>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
 <pre><code><span><span class="co">#install.packages("devtools")</span></span>
 <span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BrianZCS/lmmDIMS"</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"BrianZCS/lnmDIMS"</span><span class="op">)</span></span></code></pre>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -101,7 +126,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

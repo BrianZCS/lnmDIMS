@@ -1,3 +1,68 @@
+## multinomial model
+
+
+#' configurations generator for multinomial model
+#'
+#' The function generate all configurations used in the power test
+#' @param n_person the number of persons
+#' @param n_depth sequence depth
+#' @param n_timepoints number of time points
+#' @return configurations the configurations used in the power test
+#' @importFrom purrr cross
+#' @export
+make_configurations_mult <- function(n_person, n_depth, n_timepoints) {
+  
+  configurations <- cross(list(n = ns, n_depth = n_depth, n_timepoints = n_timepoints))
+  
+  configurations
+}
+
+#' calculate the powers
+#'
+#' The function calculates the statistics of power test
+#' @param config configurations
+#' @param n_reps number of repetitions
+#' @param ts_matrix transition matrix
+#' @param initial_state initial state
+#' @param centers centroid of cluster
+#' @param person_effect difference among persons in the simulation
+#' @return  power statistics
+#' @export
+estimate_stat_mult <- function(config, n_reps, ts_matrix, initial_state, centers, person_effect){
+  
+  statistics = matrix(nrow = length(configurations), ncol = n_reps)
+  n_species = ncol(centers)+1
+  for (i in 1:length(configurations)) {
+    for (j in 1:n_reps) {
+      samples = data.frame()
+      count = rep(configurations[[i]]$n_timepoints, configurations[[i]]$n_person)
+      samples = sim_clust(n_species = n_species,ts_matrix = ts_matrix, n_person = configurations[[i]]$n_person, count = count, initial_state = initial_state, centers = centers, person_effect = person_effect, n_depth = configurations[[i]]$n_depth)
+      samples<-as.matrix(samples)
+      sample_list <- list(n_species = n_species-1, n_clust = 5, y = samples, n_person = configurations[[i]]$n_person, count = count)
+      result=cal_fit_clust(sample_list)
+      sample_matrix = result$matrix
+      diff=sum((sample_matrix-ts_matrix)^2)
+      statistics[i,j] = diff
+    }
+  }
+  statistics
+}
+
+
+power_matrix_transform = function(matrix){
+  stat = as.data.frame(matrix)
+  for(i in 1:ncol(stat)){
+    colnames(stat)[i] = paste("rep" , i, sep = "")
+  }
+  for(i in 1:length(configurations)){
+    stat$n_person[i] = configurations[[i]]$n_person
+    stat$n_timepoints[i] = configurations[[i]]$n_timepoints
+    stat$n_depth[i] = configurations[[i]]$n_depth
+  }
+  pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")
+}
+
+
 #' Alpha sequence generator
 #'
 #' The function generate alpha (perturbation intensity sequence) which can be used in the simulator
@@ -23,7 +88,7 @@ make_alphas <- function(n_timepoints, intervals, signal_size) {
 #' @param interval the interval of perturbation (interval[1]-interval[2]): increase the permutation intensity.(interval[2]-interval[3]): achieve maximized perturbation intensity. (interval[3]-interval[4]): decrease the permutation intensity.
 #' @param n_timepoints number of time points
 #' @return configurations the configurations used in the power test
-#' @import rlist
+#' @importFrom purrr cross
 #' @export
 make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_timepoints = NULL) {
   if (is.null(intervals)) {
@@ -37,24 +102,6 @@ make_configurations_perturb <- function(ns, n_depth, alpha, intervals = NULL, n_
     configurations[[i]][["alpha"]] <- make_alphas(n_timepoints, intervals, configurations[[i]][["alpha"]]) %>%
       round(3)
   }
-  configurations
-}
-
-#' configurations generator for clust
-#'
-#' The function generate all configurations used in the power test
-#' @param ns the number of samples
-#' @param n_depth sequence depth
-#' @param alpha the maximum perturbation intensity (between 0 and 1)
-#' @param ts_matrix transition matrix
-#' @param n_timepoints number of time points
-#' @return configurations the configurations used in the power test
-#' @importFrom rlist cross
-#' @export
-make_configurations_clust <- function(ns, n_depth, n_timepoints) {
-  
-  configurations <- cross(list(n = ns, n_depth = n_depth, n_timepoints = n_timepoints))
-  
   configurations
 }
 
@@ -167,70 +214,70 @@ estimate_power_perturb <-
     statistics
   }
 
-#' calculate the powers
-#'
-#' The function calculates the statistics of power test
-#' @param configurations configurations
-#' @param n_reps number of repetitions
-#' @param simulator simulator we use
-#' @param ts_matrix transition matrix
-#' @param initial_state initial state
-#' @param centers centroid of cluster
-#' @return  power statistics
-#' @export
-estimate_power_clust <- function(configurations, n_reps, simulator, ts_matrix, inital_state, centers){
-  n_species = ncol(centers)+1
-  n_clust = nrow(centers)
-  statistics = matrix(nrow = length(configurations), ncol = length(n_reps))
-  for (i in 1:length(configurations)){
-    
-    statistics = matrix(nrow = length(configurations), ncol = n_reps)
-    for (i in 1:length(configurations)) {
-      for (j in 1:n_reps) {
-        diff<-vector()
-        for (k in 1:configurations[[i]]$n){
-          samples = data.frame()
-          samples = simulator(n_sample=1, n_species=n_species, n_depth=configurations[[i]]$n_depth,ts_matrix=ts_matrix, n_timepoints=configurations[[i]]$n_timepoints, initial_state=inital_state, centers = centers)
-          samples<-as.matrix(samples)
-          sample_list <- list(n_species = n_species-1, n_depth=configurations[[i]]$n_depth, n_steps = configurations[[i]]$n_timepoints, n_clust = n_clust, y = samples, n_person = 1)
-          result=cal_fit(sample_list)
-          diff[k]=mean(result$matrix-ts_matrix)^2
-        }
-        Error<-mean(diff)
-        statistics[i,j] = Error
-      }
-    }
-    statistics
-  }
-}
-
-#' transform the matrix to the dataframe
-#'
-#' The function transform the power statistics to the dataframe
-#' @param matrix matrix of the power statistics
-#' @return transformed dataframe
-#' @export
-power_matrix_transform_clust = function(matrix){
-  stat = as.data.frame(matrix)
-  for(i in 1:ncol(stat)){
-    colnames(stat)[i] = paste("rep" , i, sep = "")
-  }
-  for(i in 1:length(configurations)){
-    stat$n[i] = configurations[[i]]$n
-    stat$n_depth[i] = configurations[[i]]$n_depth
-    stat$timepoint[i] = configurations[[i]]$n_timepoints ##signal_size, need to be changed if the graph changed.
-  }
-  pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")
-}
-
-#' calculate the relative abundance
+#' #' calculate the powers
+#' #'
+#' #' The function calculates the statistics of power test
+#' #' @param configurations configurations
+#' #' @param n_reps number of repetitions
+#' #' @param simulator simulator we use
+#' #' @param ts_matrix transition matrix
+#' #' @param initial_state initial state
+#' #' @param centers centroid of cluster
+#' #' @return  power statistics
+#' #' @export
+#' estimate_power_clust <- function(configurations, n_reps, simulator, ts_matrix, inital_state, centers){
+#'   n_species = ncol(centers)+1
+#'   n_clust = nrow(centers)
+#'   statistics = matrix(nrow = length(configurations), ncol = length(n_reps))
+#'   for (i in 1:length(configurations)){
+#'     
+#'     statistics = matrix(nrow = length(configurations), ncol = n_reps)
+#'     for (i in 1:length(configurations)) {
+#'       for (j in 1:n_reps) {
+#'         diff<-vector()
+#'         for (k in 1:configurations[[i]]$n){
+#'           samples = data.frame()
+#'           samples = simulator(n_sample=1, n_species=n_species, n_depth=configurations[[i]]$n_depth,ts_matrix=ts_matrix, n_timepoints=configurations[[i]]$n_timepoints, initial_state=inital_state, centers = centers)
+#'           samples<-as.matrix(samples)
+#'           sample_list <- list(n_species = n_species-1, n_depth=configurations[[i]]$n_depth, n_steps = configurations[[i]]$n_timepoints, n_clust = n_clust, y = samples, n_person = 1)
+#'           result=cal_fit(sample_list)
+#'           diff[k]=mean(result$matrix-ts_matrix)^2
+#'         }
+#'         Error<-mean(diff)
+#'         statistics[i,j] = Error
+#'       }
+#'     }
+#'     statistics
+#'   }
+#' }
 #' 
-#' @param matrix the abundance data
-#' @return return the relative abundance
-#' @export 
-relative_abundence = function(matrix){
-  for(i in 1:nrow(matrix)){
-    matrix[i,] = matrix[i,]/sum(matrix[i,])
-  }
-  return(matrix)
-}
+#' #' transform the matrix to the dataframe
+#' #'
+#' #' The function transform the power statistics to the dataframe
+#' #' @param matrix matrix of the power statistics
+#' #' @return transformed dataframe
+#' #' @export
+#' power_matrix_transform_clust = function(matrix){
+#'   stat = as.data.frame(matrix)
+#'   for(i in 1:ncol(stat)){
+#'     colnames(stat)[i] = paste("rep" , i, sep = "")
+#'   }
+#'   for(i in 1:length(configurations)){
+#'     stat$n[i] = configurations[[i]]$n
+#'     stat$n_depth[i] = configurations[[i]]$n_depth
+#'     stat$timepoint[i] = configurations[[i]]$n_timepoints ##signal_size, need to be changed if the graph changed.
+#'   }
+#'   pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")
+#' }
+#' 
+#' #' calculate the relative abundance
+#' #' 
+#' #' @param matrix the abundance data
+#' #' @return return the relative abundance
+#' #' @export 
+#' relative_abundence = function(matrix){
+#'   for(i in 1:nrow(matrix)){
+#'     matrix[i,] = matrix[i,]/sum(matrix[i,])
+#'   }
+#'   return(matrix)
+#}

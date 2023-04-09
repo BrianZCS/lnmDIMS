@@ -1,0 +1,21 @@
+---
+title: "Mutinomial Model Case Study"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{case study}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(lnmDIMS)
+#load("data/PregnancyClosed15.RData")
+```
+

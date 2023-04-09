@@ -23,8 +23,24 @@
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
+  <a href="../articles/lnmDIMS.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/Casestudy.html">Mutinomial Model Case Study</a>
+    </li>
+    <li>
+      <a href="../articles/Powertest.html">Mutinomial Model Power Test</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -42,17 +58,17 @@
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="cal_fit.html">cal_fit()</a></code> </p>
-        </td>
-        <td><p>fitting cluster/perturbation model</p></td>
-      </tr><tr><td>
-          <p><code><a href="estimate_power_clust.html">estimate_power_clust()</a></code> </p>
-        </td>
-        <td><p>calculate the powers</p></td>
-      </tr><tr><td>
           <p><code><a href="estimate_power_perturb.html">estimate_power_perturb()</a></code> </p>
         </td>
         <td><p>calculate the powers</p></td>
+      </tr><tr><td>
+          <p><code><a href="estimate_stat_mult.html">estimate_stat_mult()</a></code> </p>
+        </td>
+        <td><p>calculate the powers</p></td>
+      </tr><tr><td>
+          <p><code><a href="estimate_transitions.html">estimate_transitions()</a></code> </p>
+        </td>
+        <td><p>Estimate a transition matrix from the given sequence of states</p></td>
       </tr><tr><td>
           <p><code><a href="get_centroids.html">get_centroids()</a></code> </p>
         </td>
@@ -62,41 +78,29 @@
         </td>
         <td><p>Alpha sequence generator</p></td>
       </tr><tr><td>
-          <p><code><a href="make_configurations_clust.html">make_configurations_clust()</a></code> </p>
+          <p><code><a href="make_configurations_mult.html">make_configurations_mult()</a></code> </p>
         </td>
-        <td><p>configurations generator for clust</p></td>
+        <td><p>configurations generator for multinomial model</p></td>
       </tr><tr><td>
           <p><code><a href="make_configurations_perturb.html">make_configurations_perturb()</a></code> </p>
         </td>
         <td><p>configurations generator for perturbation</p></td>
       </tr><tr><td>
-          <p><code><a href="markov_sample.html">markov_sample()</a></code> </p>
+          <p><code><a href="markov_sample.html">markov_sample()</a></code> <code><a href="markov_sample.html">markov_sample()</a></code> </p>
         </td>
-        <td><p>simulate the markov chain from transition matrix</p></td>
+        <td><p>Generate a sequence of states from the given transition matrix</p></td>
       </tr><tr><td>
           <p><code><a href="modify_centroids_fraction.html">modify_centroids_fraction()</a></code> </p>
         </td>
         <td><p>Modify centroids</p></td>
       </tr><tr><td>
-          <p><code><a href="power_matrix_transform_clust.html">power_matrix_transform_clust()</a></code> </p>
-        </td>
-        <td><p>transform the matrix to the dataframe</p></td>
-      </tr><tr><td>
           <p><code><a href="power_matrix_transform_perturb.html">power_matrix_transform_perturb()</a></code> </p>
         </td>
         <td><p>transform the matrix to the dataframe</p></td>
       </tr><tr><td>
-          <p><code><a href="relative_abundence.html">relative_abundence()</a></code> </p>
+          <p><code><a href="sim_clust_multinomial.html">sim_clust_multinomial()</a></code> </p>
         </td>
-        <td><p>calculate the relative abundance</p></td>
-      </tr><tr><td>
-          <p><code><a href="sim_clust_obs.html">sim_clust_obs()</a></code> </p>
-        </td>
-        <td><p>Simulate microbiome sample data through cluster model</p></td>
-      </tr><tr><td>
-          <p><code><a href="sim_perturb_obs.html">sim_perturb_obs()</a></code> </p>
-        </td>
-        <td><p>Simulate microbiome sample data through perturbation model</p></td>
+        <td><p>Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data</p></td>
       </tr><tr><td>
           <p><code><a href="sim_samples.html">sim_samples()</a></code> </p>
         </td>
@@ -134,7 +138,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
