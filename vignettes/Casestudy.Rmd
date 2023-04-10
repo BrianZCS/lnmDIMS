@@ -16,6 +16,54 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(lnmDIMS)
-#load("data/PregnancyClosed15.RData")
+load(system.file("data/PregnancyClosed15.RData", package="lnmDIMS"))
+```
+
+
+```{r prep_data}
+raw_data<-PSPreg$Vaginal_Swab@sam_data
+table<-PSPreg$Vaginal_Swab@otu_table
+otu_sam<-table
+otu_sam<-as.matrix(otu_sam@.Data)
+temp = as.data.frame(apply(otu_sam, 2, sum))
+top = top_n(as.data.frame(apply(otu_sam, 2, sum)), n=20)
+unique = unique(raw_data$DelDate)
+top_name = rownames(top)
+preg_data = otu_sam[,colnames(otu_sam) %in% top_name]
+
+count = vector()
+i = 1
+for(uni in unique){
+  count[i] = nrow(raw_data[raw_data$DelDate==uni,])
+  i = i+1
+}
+```
+
+```{r fit_simulate}
+n_person = 40
+data_list <- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)
+result = cal_fit_clust_multinomial(data_list)
+# theta = result$theta
+# center = result$centers
+# person_effect = result$person_effect
+# prob_matrix = result$ts_matrix
+# 
+# temp_data <- tibble(
+#   subject = rep(1:n_person, count),
+#   cluster = theta
+# ) %>%
+#   mutate(subject = as.factor(subject))
+# initial_state = c(temp_data$cluster[1])
+# for(i in 2:nrow(temp_data)){
+#   if(temp_data$subject[i]!=temp_data$subject[i-1]){
+#     initial_state = c(initial_state,temp_data$cluster[i])
+#   }
+# }
+# 
+# #n_depth as a number
+# sim_data = sim_clust_multinomial(n_depth = round(mean(rowSums(preg_data)),0), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)
+# 
+# #n_depth as a vector
+# sim_data = sim_clust_multinomial(n_depth = as.vector(rowSums(preg_data)), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)
 ```
 
