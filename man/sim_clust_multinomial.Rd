@@ -34,8 +34,6 @@ sim_clust_multinomial(
 \item{sigma}{variance added inside the cluster}
 
 \item{person_effect}{difference among persons in the simulation}
-
-\item{obs}{pilot data}
 }
 \value{
 the simulated data

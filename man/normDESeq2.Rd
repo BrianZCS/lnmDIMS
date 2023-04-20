@@ -9,3 +9,6 @@ normDESeq2(physeq, whichOTUs = NULL, method = c("poscounts", "ratio"))
 \description{
 Data normalization
 }
+\references{
+https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02104-1#MOESM1
+}

@@ -9,6 +9,9 @@ estimate_transitions(clusters)
 \arguments{
 \item{clusters}{the alpha sequence of states}
 }
+\value{
+the transition matrix
+}
 \description{
 Estimate a transition matrix from the given sequence of states
 }

@@ -1,15 +1,5 @@
-# library(lnmDIMS)
-# library(tidyverse)
-# library(cmdstanr)
-# library(dplyr)
-# library(MASS)
-# library(MCMCpack)
-# library(markovchain)
-# library(tidybayes)
-# library(phyloseq)
-# library(DESeq2)
-
 #' Data normalization
+#' @references https://genomebiology.biomedcentral.com/articles/10.1186/s13059-020-02104-1#MOESM1
 normDESeq2 <- function(physeq, whichOTUs = NULL, method = c("poscounts","ratio"))
 {
   # require(DESeq2)
@@ -46,15 +36,14 @@ normDESeq2 <- function(physeq, whichOTUs = NULL, method = c("poscounts","ratio")
   
   
   
-# Fit data to negative binomial clustering model
-# data_list a list containing number of species, number of clusters,
-#           number of persons, and a vector containing number of samples for each person
-# return theta the sequence of states for the input data, 
-#        centers the matrix representing the contribution of each species in each cluster
-#        phi the matrix containing all phi parameters for each species in each cluster
+#' Fit data to negative binomial clustering model
+#' 
+#' @param data_list a list containing number of species, number of steps, number of clusters,
+#'           number of persons, the abundance data
+#' @return a list containing the sequence of states, centers and phi
 #' @export  
 cal_fit_negbin <- function(data_list) {
-  npp_model <- cmdstan_model("./Negbin2.stan")
+  npp_model <- cmdstan_model(system.file("negbin_state_fitting", package = "lnmDIMS"))
   fit <-  npp_model$variational(data_list, iter = 10000, adapt_engaged = FALSE, eta = 0.1)
   a = fit$summary(variables = c("theta"), "mean")
   beta = fit$summary(variables = c("beta"),"mean")
@@ -80,10 +69,43 @@ cal_fit_negbin <- function(data_list) {
   return(list(theta = sequence, centers = beta_matrix, phi = phi_matrix))
 }  
 
+#' Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data through negative bionomial model
+#'
+#' @param n_species number of species
+#' @param ts_matrix transition matrix of the markov-chain
+#' @param n_person number of persons 
+#' @param count a vector of count of samples per person
+#' @param initial_state initial state of the markov-chain
+#' @param centers the centroids of each cluster
+#' @param sigma variance added inside the cluster
+#' @param person_effect difference among persons in the simulation
+#' @return the simulated data
+#' @export
+sim_clust_negbin<-function(n_species, ts_matrix, n_timepoints, initial_state, centers, phi){
+  states = c()
+  
+  for(i in 1:length(n_timepoints)){
+    states = c(states,markov_sample(ts_matrix, n_timepoints[i], initial_state[i])) 
+  }
+  
+  data=matrix(nrow=sum(n_timepoints), ncol=n_species)
+  for (i in 1:sum(n_timepoints)){
+    for  (k in 1:n_species){
+      mu = exp(centers[states[i], k])
+      data[i, k]= rnbinom(mu = mu, size = phi[states[i], k], n=1)
+    }
+  }
+  data<-as.data.frame(data)
+  
+  return(data)
+}
 
-# Make experimental configurations for power tests
-# n_timepoints number of timepoints for each person
-# n_person number of persons in the experiment
+
+
+#' Make experimental configurations for power tests
+#' 
+#' @param  n_timepoints number of timepoints for each person
+#' @param n_person number of persons in the experiment
 #' @export  
 make_configurations_negbin <- function(n_timepoints, n_person) {
   
@@ -93,12 +115,15 @@ make_configurations_negbin <- function(n_timepoints, n_person) {
 }
 
 
-# Conduct power tests and estimate the power of each configuration
-# config configurations with user defined number of timepoints and number of samples
-# n_reps number of replicates for each experimental configurations
-# n_species number of species
-# ts_matrix transition matrix
-# initial_state a vector containing the initial states of each person
+#' Conduct power tests and estimate the power of each configuration
+#'
+#' @param config configurations with user defined number of timepoints and number of samples
+#' @param n_reps number of replicates for each experimental configurations
+#' @param n_species number of species
+#' @param ts_matrix transition matrix
+#' @param initial_state a vector containing the initial states of each person
+#' @param centers the centroids of clusters
+#' @param phi dispersion parameter of the negative bionomial model
 #' @export  
 estimate_stat_negbin <- function(config, n_reps, n_species, ts_matrix, initial_state, centers, phi){
   

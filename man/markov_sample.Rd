@@ -16,6 +16,9 @@ markov_sample(prob_matrix, n_steps, initial_state)
 
 \item{initial_state}{initial states for each person}
 }
+\value{
+the generated markov-chain
+}
 \description{
 Generate a sequence of states from the given transition matrix
 

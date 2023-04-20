@@ -31,6 +31,12 @@
     <loc>/reference/cal_fit.html</loc>
   </url>
   <url>
+    <loc>/reference/cal_fit_clust_multinomial.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cal_fit_negbin.html</loc>
+  </url>
+  <url>
     <loc>/reference/estimate_power_clust.html</loc>
   </url>
   <url>
@@ -38,6 +44,9 @@
   </url>
   <url>
     <loc>/reference/estimate_stat_mult.html</loc>
+  </url>
+  <url>
+    <loc>/reference/estimate_stat_negbin.html</loc>
   </url>
   <url>
     <loc>/reference/estimate_transitions.html</loc>
@@ -56,6 +65,9 @@
   </url>
   <url>
     <loc>/reference/make_configurations_mult.html</loc>
+  </url>
+  <url>
+    <loc>/reference/make_configurations_negbin.html</loc>
   </url>
   <url>
     <loc>/reference/make_configurations_perturb.html</loc>
@@ -83,6 +95,9 @@
   </url>
   <url>
     <loc>/reference/sim_clust_multinomial.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sim_clust_negbin.html</loc>
   </url>
   <url>
     <loc>/reference/sim_clust_obs.html</loc>

@@ -1,12 +1,7 @@
-phi_inverse <- function(mu) {
-  sum_exp <- sum(exp(mu))
-  c(exp(mu) / (1 + sum_exp), 1 / (1 + sum_exp))
-}
-
-
 #' Estimate a transition matrix from the given sequence of states
 #'
 #' @param clusters the alpha sequence of states
+#' @return the transition matrix
 #' @export  
 estimate_transitions <- function(clusters) {
   z <- clusters$cluster
@@ -28,6 +23,7 @@ estimate_transitions <- function(clusters) {
 #' @param prob_matrix transition matrix among clusters
 #' @param n_steps number of steps in teh markov chain
 #' @param initial_state initial states for each person
+#' @return the generated markov-chain
 #' @export  
 markov_sample<-function(prob_matrix, n_steps, initial_state){
   
@@ -42,7 +38,11 @@ markov_sample<-function(prob_matrix, n_steps, initial_state){
   return(result)
 }
 
-#' 
+#' Fit the lnm model and out the centroids of cluster
+#'
+#' @param data_list a list containing number of species, number of clusters, pilot data
+#'           number of persons, and a vector containing number of samples for each person
+#' @return a list with the markov-chain sequence, the centroids of clusters, variance, persons'effect, the transition matrix
 #'
 #' @export
 cal_fit_clust_multinomial <- function(data_list) {
@@ -113,8 +113,6 @@ cal_fit_clust_multinomial <- function(data_list) {
 #' @param centers the centroids of each cluster
 #' @param sigma variance added inside the cluster
 #' @param person_effect difference among persons in the simulation
-#' 
-#' @param obs pilot data
 #' @return the simulated data
 #' @export
 sim_clust_multinomial<-function(n_depth, n_species, ts_matrix, n_person, count, initial_state = NULL, centers, sigma, person_effect){
