@@ -52,6 +52,7 @@ normDESeq2 <- function(physeq, whichOTUs = NULL, method = c("poscounts","ratio")
 # return theta the sequence of states for the input data, 
 #        centers the matrix representing the contribution of each species in each cluster
 #        phi the matrix containing all phi parameters for each species in each cluster
+#' @export  
 cal_fit_negbin <- function(data_list) {
   npp_model <- cmdstan_model("./Negbin2.stan")
   fit <-  npp_model$variational(data_list, iter = 10000, adapt_engaged = FALSE, eta = 0.1)
@@ -83,6 +84,7 @@ cal_fit_negbin <- function(data_list) {
 # Make experimental configurations for power tests
 # n_timepoints number of timepoints for each person
 # n_person number of persons in the experiment
+#' @export  
 make_configurations_negbin <- function(n_timepoints, n_person) {
   
   configurations <- cross(list(n_timepoints = n_timepoints, n_person = n_person))
@@ -97,6 +99,7 @@ make_configurations_negbin <- function(n_timepoints, n_person) {
 # n_species number of species
 # ts_matrix transition matrix
 # initial_state a vector containing the initial states of each person
+#' @export  
 estimate_stat_negbin <- function(config, n_reps, n_species, ts_matrix, initial_state, centers, phi){
   
   statistics = matrix(nrow = length(configurations), ncol = n_reps)

@@ -1,13 +1,13 @@
 library(devtools)
 #create("lnmDIMS")
-document("lnmDIMS")
-install("lnmDIMS")
+document("~/Documents/lnmDIMS")
 
+install("lnmDIMS")
 library(lnmDIMS)
 
 
 #build("lnmDIMS")
 library(pkgdown)
-build_site("lnmDIMS")
-#use_vignette("lnmDIMS")
-build_vignettes()
+build_site("~/Documents/lnmDIMS")
+#use_vignette("~/lnmDIMS")
+#build_vignettes()

@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Introduction • lnmDIMS</title>
+<title>lnmDIMS • lnmDIMS</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Introduction">
+<script src="../pkgdown.js"></script><meta property="og:title" content="lnmDIMS">
 <meta property="og:description" content="lnmDIMS">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -74,7 +74,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Introduction</h1>
+      <h1 data-toc-skip>lnmDIMS</h1>
             
       
       
@@ -85,85 +85,29 @@
     
     
 <div class="section level2">
-<h2 id="model">Model<a class="anchor" aria-label="anchor" href="#model"></a>
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">lnmDIMS</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: rlist</span></span>
-<span><span class="co">#&gt; Warning: package 'rlist' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Loading required package: compositions</span></span>
-<span><span class="co">#&gt; Warning: package 'compositions' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Welcome to compositions, a package for compositional data analysis.</span></span>
-<span><span class="co">#&gt; Find an intro with "? compositions"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'compositions'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     anova, cor, cov, dist, var</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     %*%, norm, scale, scale.default</span></span>
-<span><span class="co">#&gt; Loading required package: tidyverse</span></span>
-<span><span class="co">#&gt; Warning: package 'tidyverse' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'tibble' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'tidyr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'readr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'purrr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'stringr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'forcats' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'lubridate' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.4</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.0</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.4.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.0</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.1</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use the </span></span>
-<span><span class="co">#&gt; Loading required package: markovchain</span></span>
-<span><span class="co">#&gt; Warning: package 'markovchain' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Package:  markovchain</span></span>
-<span><span class="co">#&gt; Version:  0.9.1</span></span>
-<span><span class="co">#&gt; Date:     2023-01-20</span></span>
-<span><span class="co">#&gt; BugReport: https://github.com/spedygiorgio/markovchain/issues</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'markovchain'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:lubridate':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     period</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Loading required package: MCMCpack</span></span>
-<span><span class="co">#&gt; Warning: package 'MCMCpack' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Loading required package: coda</span></span>
-<span><span class="co">#&gt; Warning: package 'coda' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Loading required package: MASS</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'MASS'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     select</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ##</span></span>
-<span><span class="co">#&gt; ## Markov Chain Monte Carlo Package (MCMCpack)</span></span>
-<span><span class="co">#&gt; ## Copyright (C) 2003-2023 Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park</span></span>
-<span><span class="co">#&gt; ##</span></span>
-<span><span class="co">#&gt; ## Support provided by the U.S. National Science Foundation</span></span>
-<span><span class="co">#&gt; ## (Grants SES-0350646 and SES-0350613)</span></span>
-<span><span class="co">#&gt; ##</span></span>
-<span><span class="co">#&gt; Loading required package: cmdstanr</span></span>
-<span><span class="co">#&gt; This is cmdstanr version 0.5.3</span></span>
-<span><span class="co">#&gt; - CmdStanR documentation and vignettes: mc-stan.org/cmdstanr</span></span>
-<span><span class="co">#&gt; - CmdStan path: C:/Users/92013/Documents/.cmdstan/cmdstan-2.31.0</span></span>
-<span><span class="co">#&gt; - CmdStan version: 2.31.0</span></span>
-<span><span class="co">#&gt; Loading required package: tidybayes</span></span>
-<span><span class="co">#&gt; Warning: package 'tidybayes' was built under R version 4.2.3</span></span></code></pre></div>
+<p>To compare potential longitudinal sampling strategies, it is valuable
+and cost-efficient to simulate hypothetical experimental data and
+imagine their subsequent analysis results. Packages supporting such
+power analysis have been published, drawing from various models of
+longitudinal microbiome data. However, though it would be useful to
+calibrate these simulators based on available pilot data, there are no
+existing packages that support this. In addition, specifying model
+parameters can be difficult, especially in the absence of prior
+knowledge. However, most of the simulators do not contain functions that
+allow users to generate data with estimated model parameters obtained
+from data fitting. To improve the features, we propose a package that
+applies a logistic multinomial model to simulate longitudinal microbiome
+count data. Based on the model, we extended our simulations to two
+practical experiment designs in microbiome studies, one investigating
+the effect of certain perturbations on the microbiome, and the other
+modeling the transitions of dominant microbiome clusters. Our simulator
+allows users to generate data from scratch with default parameters or to
+estimate reasonable defaults using pilot data. To help with experimental
+design, we create functions for power analysis and provide
+visualizations to help determine the optimal experimental
+conditions.</p>
 </div>
   </div>
 
@@ -179,7 +123,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Zhuoxin Shi.</p>
+<p>Developed by Zhi Zheng, Zhuoxin Shi.</p>
 </div>
 
 <div class="pkgdown">

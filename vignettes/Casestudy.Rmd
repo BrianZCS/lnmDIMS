@@ -2,7 +2,7 @@
 title: "Mutinomial Model Case Study"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{case study}
+  %\VignetteIndexEntry{Mutinomial Model Case Study}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,10 +14,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE, warning = FALSE}
 library(lnmDIMS)
-load(system.file("data/PregnancyClosed15.RData", package="lnmDIMS"))
+#load(system.file("data/PregnancyClosed15.RData", package="lnmDIMS"))
+#use_data(PSPreg)
+data(PSPreg)
+#data("PregnancyClosed15")
 ```
+
 
 
 ```{r prep_data}
@@ -40,9 +44,9 @@ for(uni in unique){
 ```
 
 ```{r fit_simulate}
-n_person = 40
-data_list <- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)
-result = cal_fit_clust_multinomial(data_list)
+# n_person = 40
+# data_list <- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)
+# result = cal_fit_clust_multinomial(data_list)
 # theta = result$theta
 # center = result$centers
 # person_effect = result$person_effect

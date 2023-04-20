@@ -8,3 +8,11 @@ To compare potential longitudinal sampling strategies, it is valuable and cost-e
 
 devtools::install_github("BrianZCS/lnmDIMS")
 ```
+
+# Website
+
+Welcome to visit our [lnmDIMS website](https://brianzcs.github.io/lnmDIMS/).
+
+# License
+
+Code open source for anyone to use as it's under [MIT License](https://opensource.org/license/mit/).

@@ -40,9 +40,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../articles/lnmDIMS.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -86,88 +83,15 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">lnmDIMS</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: rlist</span></span>
-<span><span class="co">#&gt; Warning: package 'rlist' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Loading required package: compositions</span></span>
-<span><span class="co">#&gt; Warning: package 'compositions' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Welcome to compositions, a package for compositional data analysis.</span></span>
-<span><span class="co">#&gt; Find an intro with "? compositions"</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'compositions'</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     anova, cor, cov, dist, var</span></span>
-<span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     %*%, norm, scale, scale.default</span></span>
-<span><span class="co">#&gt; Loading required package: tidyverse</span></span>
-<span><span class="co">#&gt; Warning: package 'tidyverse' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'ggplot2' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'tibble' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'tidyr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'readr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'purrr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'stringr' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'forcats' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Warning: package 'lubridate' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.4</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.0</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.4.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.0</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.1</span></span>
-<span><span class="co">#&gt; ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use the </span></span>
-<span><span class="co">#&gt; Loading required package: markovchain</span></span>
-<span><span class="co">#&gt; Warning: package 'markovchain' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Package:  markovchain</span></span>
-<span><span class="co">#&gt; Version:  0.9.1</span></span>
-<span><span class="co">#&gt; Date:     2023-01-20</span></span>
-<span><span class="co">#&gt; BugReport: https://github.com/spedygiorgio/markovchain/issues</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'markovchain'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:lubridate':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     period</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Loading required package: MCMCpack</span></span>
-<span><span class="co">#&gt; Warning: package 'MCMCpack' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Loading required package: coda</span></span>
-<span><span class="co">#&gt; Warning: package 'coda' was built under R version 4.2.3</span></span>
-<span><span class="co">#&gt; Loading required package: MASS</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Attaching package: 'MASS'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; The following object is masked from 'package:dplyr':</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     select</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ##</span></span>
-<span><span class="co">#&gt; ## Markov Chain Monte Carlo Package (MCMCpack)</span></span>
-<span><span class="co">#&gt; ## Copyright (C) 2003-2023 Andrew D. Martin, Kevin M. Quinn, and Jong Hee Park</span></span>
-<span><span class="co">#&gt; ##</span></span>
-<span><span class="co">#&gt; ## Support provided by the U.S. National Science Foundation</span></span>
-<span><span class="co">#&gt; ## (Grants SES-0350646 and SES-0350613)</span></span>
-<span><span class="co">#&gt; ##</span></span>
-<span><span class="co">#&gt; Loading required package: cmdstanr</span></span>
-<span><span class="co">#&gt; This is cmdstanr version 0.5.3</span></span>
-<span><span class="co">#&gt; - CmdStanR documentation and vignettes: mc-stan.org/cmdstanr</span></span>
-<span><span class="co">#&gt; - CmdStan path: C:/Users/92013/Documents/.cmdstan/cmdstan-2.31.0</span></span>
-<span><span class="co">#&gt; - CmdStan version: 2.31.0</span></span>
-<span><span class="co">#&gt; Loading required package: tidybayes</span></span>
-<span><span class="co">#&gt; Warning: package 'tidybayes' was built under R version 4.2.3</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"data/PregnancyClosed15.RData"</span>, package<span class="op">=</span><span class="st">"lnmDIMS"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#load(system.file("data/PregnancyClosed15.RData", package="lnmDIMS"))</span></span>
+<span><span class="co">#use_data(PSPreg)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PSPreg</span><span class="op">)</span></span>
+<span><span class="co">#data("PregnancyClosed15")</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_data</span><span class="op">&lt;-</span><span class="va">PSPreg</span><span class="op">$</span><span class="va">Vaginal_Swab</span><span class="op">@</span><span class="va">sam_data</span></span>
 <span><span class="va">table</span><span class="op">&lt;-</span><span class="va">PSPreg</span><span class="op">$</span><span class="va">Vaginal_Swab</span><span class="op">@</span><span class="va">otu_table</span></span>
 <span><span class="va">otu_sam</span><span class="op">&lt;-</span><span class="va">table</span></span>
 <span><span class="va">otu_sam</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">otu_sam</span><span class="op">@</span><span class="va">.Data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: phyloseq</span></span>
 <span><span class="va">temp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">otu_sam</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">top</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">otu_sam</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Selecting by apply(otu_sam, 2, sum)</span></span>
@@ -182,8 +106,8 @@
 <span>  <span class="va">i</span> <span class="op">=</span> <span class="va">i</span><span class="op">+</span><span class="fl">1</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">n_person</span> <span class="op">=</span> <span class="fl">40</span></span>
-<span><span class="va">data_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n_species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">preg_data</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, n_clust <span class="op">=</span> <span class="fl">5</span>, y <span class="op">=</span> <span class="va">preg_data</span>, n_person <span class="op">=</span> <span class="fl">40</span>,count <span class="op">=</span> <span class="va">count</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># n_person = 40</span></span>
+<span><span class="co"># data_list &lt;- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)</span></span>
 <span><span class="co"># result = cal_fit_clust_multinomial(data_list)</span></span>
 <span><span class="co"># theta = result$theta</span></span>
 <span><span class="co"># center = result$centers</span></span>
@@ -219,7 +143,7 @@
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Zhuoxin Shi.</p>
+<p>Developed by Zhi Zheng, Zhuoxin Shi.</p>
 </div>
 
 <div class="pkgdown">
