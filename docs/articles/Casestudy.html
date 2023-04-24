@@ -88,22 +88,23 @@
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PSPreg</span><span class="op">)</span></span>
 <span><span class="co">#data("PregnancyClosed15")</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># raw_data&lt;-PSPreg$Vaginal_Swab@sam_data</span></span>
-<span><span class="co"># table&lt;-PSPreg$Vaginal_Swab@otu_table</span></span>
-<span><span class="co"># otu_sam&lt;-table</span></span>
-<span><span class="co"># otu_sam&lt;-as.matrix(otu_sam@.Data)</span></span>
-<span><span class="co"># temp = as.data.frame(apply(otu_sam, 2, sum))</span></span>
-<span><span class="co"># top = top_n(as.data.frame(apply(otu_sam, 2, sum)), n=20)</span></span>
-<span><span class="co"># unique = unique(raw_data$DelDate)</span></span>
-<span><span class="co"># top_name = rownames(top)</span></span>
-<span><span class="co"># preg_data = otu_sam[,colnames(otu_sam) %in% top_name]</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># count = vector()</span></span>
-<span><span class="co"># i = 1</span></span>
-<span><span class="co"># for(uni in unique){</span></span>
-<span><span class="co">#   count[i] = nrow(raw_data[raw_data$DelDate==uni,])</span></span>
-<span><span class="co">#   i = i+1</span></span>
-<span><span class="co"># }</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">raw_data</span><span class="op">&lt;-</span><span class="va">PSPreg</span><span class="op">$</span><span class="va">Vaginal_Swab</span><span class="op">@</span><span class="va">sam_data</span></span>
+<span><span class="va">table</span><span class="op">&lt;-</span><span class="va">PSPreg</span><span class="op">$</span><span class="va">Vaginal_Swab</span><span class="op">@</span><span class="va">otu_table</span></span>
+<span><span class="va">otu_sam</span><span class="op">&lt;-</span><span class="va">table</span></span>
+<span><span class="va">otu_sam</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">otu_sam</span><span class="op">@</span><span class="va">.Data</span><span class="op">)</span></span>
+<span><span class="va">temp</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">otu_sam</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">top</span> <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/top_n.html" class="external-link">top_n</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">otu_sam</span>, <span class="fl">2</span>, <span class="va">sum</span><span class="op">)</span><span class="op">)</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Selecting by apply(otu_sam, 2, sum)</span></span>
+<span><span class="va">unique</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">raw_data</span><span class="op">$</span><span class="va">DelDate</span><span class="op">)</span></span>
+<span><span class="va">top_name</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">top</span><span class="op">)</span></span>
+<span><span class="va">preg_data</span> <span class="op">=</span> <span class="va">otu_sam</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">otu_sam</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">top_name</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">count</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">vector</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">i</span> <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">uni</span> <span class="kw">in</span> <span class="va">unique</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">count</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">raw_data</span><span class="op">[</span><span class="va">raw_data</span><span class="op">$</span><span class="va">DelDate</span><span class="op">==</span><span class="va">uni</span>,<span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="va">i</span> <span class="op">=</span> <span class="va">i</span><span class="op">+</span><span class="fl">1</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># n_person = 40</span></span>
 <span><span class="co"># data_list &lt;- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)</span></span>
