@@ -42,15 +42,23 @@ for(uni in unique){
   i = i+1
 }
 ```
+<<<<<<< HEAD
 ### Fit the model
+=======
+
+## Simulated the data
+>>>>>>> ca6d5f1359c41dc0b92ad5932185d9ecd81a5d1c
 ```{r fit_simulate}
 n_person = 40
 data_list <- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)
 result = cal_fit_clust_multinomial(data_list)
+<<<<<<< HEAD
 ```
 
 ### Simulation
 ```{r}
+=======
+>>>>>>> ca6d5f1359c41dc0b92ad5932185d9ecd81a5d1c
 theta = result$theta
 center = result$centers
 person_effect = result$person_effect
@@ -70,6 +78,7 @@ for(i in 2:nrow(temp_data)){
 
 #n_depth as a number
 
+<<<<<<< HEAD
 #sim_data = sim_clust_multinomial(n_depth = round(mean(rowSums(preg_data)),0), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)
 
 #n_depth as a vector
@@ -86,5 +95,11 @@ specieswise_plot(sim_data, preg_data, TRUE)
 ### Power Test
 ```{r}
 
+=======
+# sim_data = sim_clust_multinomial(n_depth = round(mean(rowSums(preg_data)),0), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)
+
+#n_depth as a vector
+sim_data = sim_clust_multinomial(n_depth = as.vector(rowSums(preg_data)), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)
+>>>>>>> ca6d5f1359c41dc0b92ad5932185d9ecd81a5d1c
 ```
 
