@@ -2,7 +2,7 @@
 % Please edit documentation in R/multinomial_model.R
 \name{cal_fit_clust_multinomial}
 \alias{cal_fit_clust_multinomial}
-\title{Fit the lnm model and out the centroids of cluster}
+\title{Fitting the logistic normal multinomial model}
 \usage{
 cal_fit_clust_multinomial(data_list)
 }
@@ -14,5 +14,5 @@ number of persons, and a vector containing number of samples for each person}
 a list with the markov-chain sequence, the centroids of clusters, variance, persons'effect, the transition matrix
 }
 \description{
-Fit the lnm model and out the centroids of cluster
+Fit the lnm model and return the centroids of cluster
 }

@@ -14,5 +14,5 @@ number of persons, the abundance data}
 a list containing the sequence of states, centers and phi
 }
 \description{
-Fit data to negative binomial clustering model
+Fit data to negative binomial clustering model and output the fitted parameters in the model
 }

@@ -3,7 +3,7 @@
 %   R/simulation_without_data.R
 \name{markov_sample}
 \alias{markov_sample}
-\title{Generate a sequence of states from the given transition matrix}
+\title{Generate a sequence of state}
 \usage{
 markov_sample(prob_matrix, n_steps, initial_state)
 
@@ -21,6 +21,4 @@ the generated markov-chain
 }
 \description{
 Generate a sequence of states from the given transition matrix
-
-simulate the markov chain from transition matrix
 }

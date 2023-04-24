@@ -55,6 +55,9 @@
     <loc>/reference/get_centroids.html</loc>
   </url>
   <url>
+    <loc>/reference/heat_map.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
@@ -80,6 +83,9 @@
   </url>
   <url>
     <loc>/reference/normDESeq2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/power_matrix_transform.html</loc>
   </url>
   <url>
     <loc>/reference/power_matrix_transform_clust.html</loc>
@@ -119,6 +125,9 @@
   </url>
   <url>
     <loc>/reference/sim_ts_perturb_2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/specieswise_plot.html</loc>
   </url>
   <url>
     <loc>/reference/violin_plot.html</loc>

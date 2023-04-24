@@ -38,6 +38,7 @@ normDESeq2 <- function(physeq, whichOTUs = NULL, method = c("poscounts","ratio")
   
 #' Fit data to negative binomial clustering model
 #' 
+#' Fit data to negative binomial clustering model and output the fitted parameters in the model
 #' @param data_list a list containing number of species, number of steps, number of clusters,
 #'           number of persons, the abundance data
 #' @return a list containing the sequence of states, centers and phi
@@ -69,8 +70,9 @@ cal_fit_negbin <- function(data_list) {
   return(list(theta = sequence, centers = beta_matrix, phi = phi_matrix))
 }  
 
-#' Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data through negative bionomial model
+#' Simulate clustering data through negative bionomial model
 #'
+#' Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data through negative bionomial model
 #' @param n_species number of species
 #' @param ts_matrix transition matrix of the markov-chain
 #' @param n_person number of persons 
@@ -98,56 +100,4 @@ sim_clust_negbin<-function(n_species, ts_matrix, n_timepoints, initial_state, ce
   data<-as.data.frame(data)
   
   return(data)
-}
-
-
-
-#' Make experimental configurations for power tests
-#' 
-#' @param  n_timepoints number of timepoints for each person
-#' @param n_person number of persons in the experiment
-#' @export  
-make_configurations_negbin <- function(n_timepoints, n_person) {
-  
-  configurations <- cross(list(n_timepoints = n_timepoints, n_person = n_person))
-  
-  configurations
-}
-
-
-#' Conduct power tests and estimate the power of each configuration
-#'
-#' @param config configurations with user defined number of timepoints and number of samples
-#' @param n_reps number of replicates for each experimental configurations
-#' @param n_species number of species
-#' @param ts_matrix transition matrix
-#' @param initial_state a vector containing the initial states of each person
-#' @param centers the centroids of clusters
-#' @param phi dispersion parameter of the negative bionomial model
-#' @export  
-estimate_stat_negbin <- function(config, n_reps, n_species, ts_matrix, initial_state, centers, phi){
-  
-  statistics = matrix(nrow = length(configurations), ncol = n_reps)
-  
-  for (i in 1:length(configurations)) {
-    for (j in 1:n_reps) {
-      samples = data.frame()
-      count = rep(configurations[[i]]$n_timepoints, configurations[[i]]$n_person)
-      samples = sim_negbin(n_species = n_species,ts_matrix = ts_matrix, n_person = configurations[[i]]$n_person, count = count, initial_state = initial_state, centers = centers, phi = phi)
-      samples<-as.matrix(samples)
-      sample_list <- list(n_species = n_species, n_clust = 5, y = samples, n_person = configurations[[i]]$n_person, count = count)
-      result=cal_fit_negbin(sample_list)
-      theta = result$theta
-      sample_state <- tibble(
-        subject = rep(1:configurations[[i]]$n_person, count),
-        cluster = theta
-      ) %>%
-        mutate(subject = as.factor(subject))  
-      
-      sample_matrix = estimate_transitions(sample_state)
-      diff=mean((sample_matrix-ts_matrix)^2)
-      statistics[i,j] = diff
-    }
-  }
-  statistics
 }

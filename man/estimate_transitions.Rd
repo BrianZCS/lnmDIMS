@@ -2,7 +2,7 @@
 % Please edit documentation in R/multinomial_model.R
 \name{estimate_transitions}
 \alias{estimate_transitions}
-\title{Estimate a transition matrix from the given sequence of states}
+\title{Estimate a transition matrix}
 \usage{
 estimate_transitions(clusters)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/negbin_model.R
 \name{sim_clust_negbin}
 \alias{sim_clust_negbin}
-\title{Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data through negative bionomial model}
+\title{Simulate clustering data through negative bionomial model}
 \usage{
 sim_clust_negbin(
   n_species,

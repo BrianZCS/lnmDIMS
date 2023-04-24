@@ -2,7 +2,7 @@
 % Please edit documentation in R/multinomial_model.R
 \name{sim_clust_multinomial}
 \alias{sim_clust_multinomial}
-\title{Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data}
+\title{Simulate clustering data}
 \usage{
 sim_clust_multinomial(
   n_depth,

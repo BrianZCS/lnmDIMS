@@ -12,7 +12,7 @@
 #' @export
 make_configurations_mult <- function(n_person, n_depth, n_timepoints) {
   
-  configurations <- cross(list(n = ns, n_depth = n_depth, n_timepoints = n_timepoints))
+  configurations <- cross(list(n_timepoints = n_timepoints, n_person = n_person, n_depth = n_depth))
   
   configurations
 }
@@ -48,7 +48,12 @@ estimate_stat_mult <- function(config, n_reps, ts_matrix, initial_state, centers
   statistics
 }
 
-
+#' transform the matrix to the dataframe
+#'
+#' The function transform the power statistics to the dataframe
+#' @param matrix matrix of the power statistics
+#' @return transformed dataframe
+#' @export
 power_matrix_transform = function(matrix){
   stat = as.data.frame(matrix)
   for(i in 1:ncol(stat)){
@@ -61,6 +66,64 @@ power_matrix_transform = function(matrix){
   }
   pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")
 }
+
+
+
+
+
+#' Make experimental configurations for power tests
+#' 
+#' Make experimental configurations for power tests for negative bionomial model
+#' @param  n_timepoints number of timepoints for each person
+#' @param n_person number of persons in the experiment
+#' @export  
+make_configurations_negbin <- function(n_timepoints, n_person) {
+  
+  configurations <- cross(list(n_timepoints = n_timepoints, n_person = n_person))
+  
+  configurations
+}
+
+
+#' Conduct power tests and estimate the power of each configuration
+#'
+#' Conduct power tests and estimate the power of each configuration for negative bionomial model
+#' @param config configurations with user defined number of timepoints and number of samples
+#' @param n_reps number of replicates for each experimental configurations
+#' @param n_species number of species
+#' @param ts_matrix transition matrix
+#' @param initial_state a vector containing the initial states of each person
+#' @param centers the centroids of clusters
+#' @param phi dispersion parameter of the negative bionomial model
+#' @export  
+estimate_stat_negbin <- function(config, n_reps, n_species, ts_matrix, initial_state, centers, phi){
+  
+  statistics = matrix(nrow = length(configurations), ncol = n_reps)
+  
+  for (i in 1:length(configurations)) {
+    for (j in 1:n_reps) {
+      samples = data.frame()
+      count = rep(configurations[[i]]$n_timepoints, configurations[[i]]$n_person)
+      samples = sim_clust_negbin(n_species = n_species,ts_matrix = ts_matrix, n_person = configurations[[i]]$n_person, count = count, initial_state = initial_state, centers = centers, phi = phi)
+      samples<-as.matrix(samples)
+      sample_list <- list(n_species = n_species, n_clust = 5, y = samples, n_person = configurations[[i]]$n_person, count = count)
+      result=cal_fit_negbin(sample_list)
+      theta = result$theta
+      sample_state <- tibble(
+        subject = rep(1:configurations[[i]]$n_person, count),
+        cluster = theta
+      ) %>%
+        mutate(subject = as.factor(subject))  
+      
+      sample_matrix = estimate_transitions(sample_state)
+      diff=mean((sample_matrix-ts_matrix)^2)
+      statistics[i,j] = diff
+    }
+  }
+  statistics
+}
+
+
 
 
 #' Alpha sequence generator
@@ -214,6 +277,10 @@ estimate_power_perturb <-
     statistics
   }
 
+
+
+
+
 #' #' calculate the powers
 #' #'
 #' #' The function calculates the statistics of power test
@@ -249,35 +316,4 @@ estimate_power_perturb <-
 #'     }
 #'     statistics
 #'   }
-#' }
-#' 
-#' #' transform the matrix to the dataframe
-#' #'
-#' #' The function transform the power statistics to the dataframe
-#' #' @param matrix matrix of the power statistics
-#' #' @return transformed dataframe
-#' #' @export
-#' power_matrix_transform_clust = function(matrix){
-#'   stat = as.data.frame(matrix)
-#'   for(i in 1:ncol(stat)){
-#'     colnames(stat)[i] = paste("rep" , i, sep = "")
-#'   }
-#'   for(i in 1:length(configurations)){
-#'     stat$n[i] = configurations[[i]]$n
-#'     stat$n_depth[i] = configurations[[i]]$n_depth
-#'     stat$timepoint[i] = configurations[[i]]$n_timepoints ##signal_size, need to be changed if the graph changed.
-#'   }
-#'   pivot_longer(stat, cols = starts_with("rep"),names_to = "rep",values_to = "power")
-#' }
-#' 
-#' #' calculate the relative abundance
-#' #' 
-#' #' @param matrix the abundance data
-#' #' @return return the relative abundance
-#' #' @export 
-#' relative_abundence = function(matrix){
-#'   for(i in 1:nrow(matrix)){
-#'     matrix[i,] = matrix[i,]/sum(matrix[i,])
-#'   }
-#'   return(matrix)
-#}
+#'}

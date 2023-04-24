@@ -1,5 +1,6 @@
-#' Estimate a transition matrix from the given sequence of states
+#' Estimate a transition matrix
 #'
+#' Estimate a transition matrix from the given sequence of states
 #' @param clusters the alpha sequence of states
 #' @return the transition matrix
 #' @export  
@@ -18,8 +19,9 @@ estimate_transitions <- function(clusters) {
   P / rowSums(P) 
 }
 
-#' Generate a sequence of states from the given transition matrix
+#' Generate a sequence of state
 #'
+#' Generate a sequence of states from the given transition matrix
 #' @param prob_matrix transition matrix among clusters
 #' @param n_steps number of steps in teh markov chain
 #' @param initial_state initial states for each person
@@ -38,8 +40,9 @@ markov_sample<-function(prob_matrix, n_steps, initial_state){
   return(result)
 }
 
-#' Fit the lnm model and out the centroids of cluster
+#' Fitting the logistic normal multinomial model
 #'
+#' Fit the lnm model and return the centroids of cluster
 #' @param data_list a list containing number of species, number of clusters, pilot data
 #'           number of persons, and a vector containing number of samples for each person
 #' @return a list with the markov-chain sequence, the centroids of clusters, variance, persons'effect, the transition matrix
@@ -102,8 +105,9 @@ cal_fit_clust_multinomial <- function(data_list) {
   return(list(theta = sequence, centers = beta_matrix, sigma = sigma$mean, person_effect = person_effect_matrix, ts_matrix = fit_matrix))
 }
 
-#' Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data
+#' Simulate clustering data
 #'
+#' Simulate clustering data given a set of user defined parameters and model parameters from fitting existing data
 #' @param n_depth sequence depth
 #' @param n_species number of species
 #' @param ts_matrix transition matrix of the markov-chain
