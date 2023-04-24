@@ -1,3 +1,47 @@
+#' fitting perturbation model
+#'
+#' To fit the perturbation model and return the fitted parameters
+#' @param data_list data_list used in the model
+#' @return fitted parameters
+#' @export
+cal_fit_perturbation<-function(data_list){
+  model<-cmdstan_model(system.file("lmn_perturbation_fitting.stan", package = "lnmDIMS"))
+  fit <- model$variational(data_list, iter = 2e4)
+  sigma = fit$summary(variables = c("sigma"), "mean")
+  a = fit$summary(variables = c("beta"), "mean")
+  beta = data.frame()
+  for(i in 1:2){
+    for (j in 1:data_list$n_species){
+      beta[i,j] = a$mean[a$variable==paste("beta[",i,",", j, "]", sep = "")]
+    }
+  }
+  list(sigma = sigma$mean, beta = as.matrix(beta))
+}
+
+#' Simulate microbiome sample data through perturbation model
+#'
+#' Simulate microbiome abundance count data with user-specified number of samples, species and sequencing depth
+#' @param alpha the perturbation intensity, 0 means no perturbed, 1 means fully perturbed
+#' @param obs observed microbiome data
+#' @param n_depth sequence depth
+#' @return the simulated data
+#' @examples
+#' sim_perturb_obs(alpha = c(0,0,0.8,0.8,0.8,0,0,0,0,0), obs = data, n_depth = 2000)
+#' @export
+sim_perturb_obs<-function(alpha, obs, n_depth = NULL){
+  n_species<-ncol(obs)-1
+  if(is.null(n_depth)){
+    n_depth = round(mean(rowSums(obs)),0)
+  }
+  data_list<-list(alpha=alpha, n_species=ncol(obs)-1, n_timepoints = length(alpha), y = obs)
+  result = cal_fit_perturbation(data_list)
+  beta = result$beta
+
+  data = sim_ts_perturb_2(alpha = alpha, n_species = n_species, n_depth = n_depth, beta = beta)
+  return (data)
+}
+
+
 #' cal_fit_clust <- function(data_list) {
 #'   npp_model <- cmdstan_model(system.file("lmn_state_fitting.stan", package = "lmnsim"))
 #'   fit <-  npp_model$variational(data_list, iter = 10000, adapt_engaged = FALSE, eta = 0.1)
@@ -45,21 +89,6 @@
 #'   return(list(sigma = b, matrix = as.matrix(fit_matrix), centers = beta_matrix))
 #' }
 #' 
-#' ##fitting method for perturbation
-#' cal_fit_perturbation<-function(data_list){
-#'   model<-cmdstan_model(system.file("lmn_perturbation_fitting.stan", package = "lmnsim"))
-#'   fit <- model$variational(data_list, iter = 2e4)
-#'   sigma = fit$summary(variables = c("sigma"), "mean")
-#'   a = fit$summary(variables = c("beta"), "mean")
-#'   beta = data.frame()
-#'   for(i in 1:2){
-#'     for (j in 1:data_list$n_species){
-#'       beta[i,j] = a$mean[a$variable==paste("beta[",i,",", j, "]", sep = "")]
-#'     }
-#'   }
-#'   list(sigma = sigma$mean, beta = as.matrix(beta))
-#' }
-#' 
 #' #' fitting cluster/perturbation model
 #' #'
 #' #' To fit the cluster/perturbation model and return the fitted parameters
@@ -76,6 +105,7 @@
 #'   }
 #' 
 #' }
+#' 
 #' #' Simulate microbiome sample data through cluster model
 #' #'
 #' #' Simulate microbiome abundance count data with user-specified number of samples, species and sequencing depth
@@ -114,29 +144,3 @@
 #'   }
 #'   list(states=states, data=data)
 #' }
-#' 
-#' 
-#' #' Simulate microbiome sample data through perturbation model
-#' #'
-#' #' Simulate microbiome abundance count data with user-specified number of samples, species and sequencing depth
-#' #' @param alpha the perturbation intensity, 0 means no perturbed, 1 means fully perturbed
-#' #' @param obs observed microbiome data
-#' #' @param n_depth sequence depth
-#' #' @return the simulated data
-#' #' @examples
-#' #' sim_perturb_obs(alpha = c(0,0,0.8,0.8,0.8,0,0,0,0,0), obs = data, n_depth = 2000)
-#' #' @export
-#' sim_perturb_obs<-function(alpha, obs, n_depth = NULL){
-#'   n_species<-ncol(obs)-1
-#'   if(is.null(n_depth)){
-#'     n_depth = round(mean(rowSums(obs)),0)
-#'   }
-#'   data_list<-list(alpha=alpha, n_species=ncol(obs)-1, n_timepoints = length(alpha), y = obs)
-#'   result = cal_fit_perturbation(data_list)
-#'   beta = result$beta
-#' 
-#'   data = sim_ts_perturb_2(alpha = alpha, n_species = n_species, n_depth = n_depth, beta = beta)
-#'   return (data)
-#' }
-#' 
-#' 

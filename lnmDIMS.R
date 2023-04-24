@@ -14,4 +14,4 @@ build_site("~/Documents/lnmDIMS")
 build_site("lnmDIMS")
 
 #use_vignette("~/lnmDIMS")
-#build_vignettes()
+build_vignettes()

@@ -22,7 +22,8 @@ Imports:
   MASS,
   MCMCpack,
   tidybayes,
-  phyloseq
+  phyloseq,
+  ggplot2
 Depends:
     rlist,
     compositions,
@@ -35,6 +36,7 @@ Depends:
     MCMCpack,
     tidybayes,
     phyloseq,
+    ggplot2,
     R (>= 2.10)
 Suggests: 
     knitr,

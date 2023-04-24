@@ -87,6 +87,9 @@
 <span><span class="co">#use_data(PSPreg)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PSPreg</span><span class="op">)</span></span>
 <span><span class="co">#data("PregnancyClosed15")</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="load-the-pilot-data">Load the pilot data<a class="anchor" aria-label="anchor" href="#load-the-pilot-data"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_data</span><span class="op">&lt;-</span><span class="va">PSPreg</span><span class="op">$</span><span class="va">Vaginal_Swab</span><span class="op">@</span><span class="va">sam_data</span></span>
 <span><span class="va">table</span><span class="op">&lt;-</span><span class="va">PSPreg</span><span class="op">$</span><span class="va">Vaginal_Swab</span><span class="op">@</span><span class="va">otu_table</span></span>
@@ -105,32 +108,107 @@
 <span>  <span class="va">count</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">raw_data</span><span class="op">[</span><span class="va">raw_data</span><span class="op">$</span><span class="va">DelDate</span><span class="op">==</span><span class="va">uni</span>,<span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="va">i</span> <span class="op">=</span> <span class="va">i</span><span class="op">+</span><span class="fl">1</span></span>
 <span><span class="op">}</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="fit-the-model">Fit the model<a class="anchor" aria-label="anchor" href="#fit-the-model"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># n_person = 40</span></span>
-<span><span class="co"># data_list &lt;- list(n_species = ncol(preg_data)-1, n_clust = 5, y = preg_data, n_person = 40,count = count)</span></span>
-<span><span class="co"># result = cal_fit_clust_multinomial(data_list)</span></span>
-<span><span class="co"># theta = result$theta</span></span>
-<span><span class="co"># center = result$centers</span></span>
-<span><span class="co"># person_effect = result$person_effect</span></span>
-<span><span class="co"># prob_matrix = result$ts_matrix</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># temp_data &lt;- tibble(</span></span>
-<span><span class="co">#   subject = rep(1:n_person, count),</span></span>
-<span><span class="co">#   cluster = theta</span></span>
-<span><span class="co"># ) %&gt;%</span></span>
-<span><span class="co">#   mutate(subject = as.factor(subject))</span></span>
-<span><span class="co"># initial_state = c(temp_data$cluster[1])</span></span>
-<span><span class="co"># for(i in 2:nrow(temp_data)){</span></span>
-<span><span class="co">#   if(temp_data$subject[i]!=temp_data$subject[i-1]){</span></span>
-<span><span class="co">#     initial_state = c(initial_state,temp_data$cluster[i])</span></span>
-<span><span class="co">#   }</span></span>
-<span><span class="co"># }</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># #n_depth as a number</span></span>
-<span><span class="co"># sim_data = sim_clust_multinomial(n_depth = round(mean(rowSums(preg_data)),0), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)</span></span>
-<span><span class="co"># </span></span>
-<span><span class="co"># #n_depth as a vector</span></span>
-<span><span class="co"># sim_data = sim_clust_multinomial(n_depth = as.vector(rowSums(preg_data)), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">n_person</span> <span class="op">=</span> <span class="fl">40</span></span>
+<span><span class="va">data_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>n_species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">preg_data</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span>, n_clust <span class="op">=</span> <span class="fl">5</span>, y <span class="op">=</span> <span class="va">preg_data</span>, n_person <span class="op">=</span> <span class="fl">40</span>,count <span class="op">=</span> <span class="va">count</span><span class="op">)</span></span>
+<span><span class="va">result</span> <span class="op">=</span> <span class="fu"><a href="../reference/cal_fit_clust_multinomial.html">cal_fit_clust_multinomial</a></span><span class="op">(</span><span class="va">data_list</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ------------------------------------------------------------ </span></span>
+<span><span class="co">#&gt; EXPERIMENTAL ALGORITHM: </span></span>
+<span><span class="co">#&gt;   This procedure has not been thoroughly tested and may be unstable </span></span>
+<span><span class="co">#&gt;   or buggy. The interface is subject to change. </span></span>
+<span><span class="co">#&gt; ------------------------------------------------------------ </span></span>
+<span><span class="co">#&gt; Gradient evaluation took 0.031795 seconds </span></span>
+<span><span class="co">#&gt; 1000 transitions using 10 leapfrog steps per transition would take 317.95 seconds. </span></span>
+<span><span class="co">#&gt; Adjust your expectations accordingly! </span></span>
+<span><span class="co">#&gt; Begin stochastic gradient ascent. </span></span>
+<span><span class="co">#&gt;   iter             ELBO   delta_ELBO_mean   delta_ELBO_med   notes  </span></span>
+<span><span class="co">#&gt;    100      -862101.700             1.000            1.000 </span></span>
+<span><span class="co">#&gt;    200      -397024.708             1.086            1.171 </span></span>
+<span><span class="co">#&gt;    300      -253263.741             0.913            1.000 </span></span>
+<span><span class="co">#&gt;    400      -185930.339             0.775            1.000 </span></span>
+<span><span class="co">#&gt;    500      -149426.312             0.669            0.568 </span></span>
+<span><span class="co">#&gt;    600      -127183.925             0.587            0.568 </span></span>
+<span><span class="co">#&gt;    700      -110384.201             0.525            0.362 </span></span>
+<span><span class="co">#&gt;    800       -98989.938             0.473            0.362 </span></span>
+<span><span class="co">#&gt;    900       -90044.279             0.432            0.244 </span></span>
+<span><span class="co">#&gt;   1000       -83153.874             0.397            0.244 </span></span>
+<span><span class="co">#&gt;   1100       -77837.676             0.304            0.175 </span></span>
+<span><span class="co">#&gt;   1200       -73501.204             0.193            0.152 </span></span>
+<span><span class="co">#&gt;   1300       -69821.928             0.141            0.115 </span></span>
+<span><span class="co">#&gt;   1400       -66789.283             0.109            0.099 </span></span>
+<span><span class="co">#&gt;   1500       -64214.540             0.089            0.083 </span></span>
+<span><span class="co">#&gt;   1600       -61888.726             0.075            0.068 </span></span>
+<span><span class="co">#&gt;   1700       -59984.475             0.063            0.059 </span></span>
+<span><span class="co">#&gt;   1800       -58246.359             0.055            0.053 </span></span>
+<span><span class="co">#&gt;   1900       -56671.908             0.048            0.045 </span></span>
+<span><span class="co">#&gt;   2000       -55289.899             0.042            0.040 </span></span>
+<span><span class="co">#&gt;   2100       -54043.419             0.037            0.038 </span></span>
+<span><span class="co">#&gt;   2200       -52825.469             0.034            0.032 </span></span>
+<span><span class="co">#&gt;   2300       -51799.645             0.030            0.030 </span></span>
+<span><span class="co">#&gt;   2400       -50877.767             0.028            0.028 </span></span>
+<span><span class="co">#&gt;   2500       -49962.727             0.025            0.025 </span></span>
+<span><span class="co">#&gt;   2600       -49208.596             0.023            0.023 </span></span>
+<span><span class="co">#&gt;   2700       -48503.422             0.021            0.023 </span></span>
+<span><span class="co">#&gt;   2800       -47831.563             0.020            0.020 </span></span>
+<span><span class="co">#&gt;   2900       -47207.741             0.018            0.018 </span></span>
+<span><span class="co">#&gt;   3000       -46700.126             0.017            0.018 </span></span>
+<span><span class="co">#&gt;   3100       -46171.871             0.016            0.015 </span></span>
+<span><span class="co">#&gt;   3200       -45737.910             0.015            0.015 </span></span>
+<span><span class="co">#&gt;   3300       -45327.976             0.013            0.014 </span></span>
+<span><span class="co">#&gt;   3400       -44774.370             0.013            0.013 </span></span>
+<span><span class="co">#&gt;   3500       -44368.316             0.012            0.012 </span></span>
+<span><span class="co">#&gt;   3600       -44074.232             0.011            0.011 </span></span>
+<span><span class="co">#&gt;   3700       -43629.604             0.011            0.011 </span></span>
+<span><span class="co">#&gt;   3800       -43367.074             0.010            0.010   MEAN ELBO CONVERGED </span></span>
+<span><span class="co">#&gt; Drawing a sample of size 1000 from the approximate posterior...  </span></span>
+<span><span class="co">#&gt; COMPLETED. </span></span>
+<span><span class="co">#&gt; Finished in  62.2 seconds.</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="simulated-the-data">Simulated the data<a class="anchor" aria-label="anchor" href="#simulated-the-data"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">theta</span> <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">theta</span></span>
+<span><span class="va">center</span> <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">centers</span></span>
+<span><span class="va">person_effect</span> <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">person_effect</span></span>
+<span><span class="va">prob_matrix</span> <span class="op">=</span> <span class="va">result</span><span class="op">$</span><span class="va">ts_matrix</span></span>
+<span></span>
+<span><span class="va">temp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n_person</span>, <span class="va">count</span><span class="op">)</span>,</span>
+<span>  cluster <span class="op">=</span> <span class="va">theta</span></span>
+<span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">subject</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">initial_state</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">temp_data</span><span class="op">$</span><span class="va">cluster</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">temp_data</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="va">temp_data</span><span class="op">$</span><span class="va">subject</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">!=</span><span class="va">temp_data</span><span class="op">$</span><span class="va">subject</span><span class="op">[</span><span class="va">i</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">initial_state</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">initial_state</span>,<span class="va">temp_data</span><span class="op">$</span><span class="va">cluster</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co">#n_depth as a number</span></span>
+<span><span class="co">#sim_data = sim_clust_multinomial(n_depth = round(mean(rowSums(preg_data)),0), n_species = ncol(preg_data), prob_matrix, length(count), count ,initial_state, center,sigma, person_effect)</span></span>
+<span></span>
+<span><span class="co">#n_depth as a vector</span></span>
+<span><span class="va">sim_data</span> <span class="op">=</span> <span class="fu"><a href="../reference/sim_clust_multinomial.html">sim_clust_multinomial</a></span><span class="op">(</span>n_depth <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowSums</a></span><span class="op">(</span><span class="va">preg_data</span><span class="op">)</span><span class="op">)</span>, n_species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">preg_data</span><span class="op">)</span>, <span class="va">prob_matrix</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">count</span><span class="op">)</span>, <span class="va">count</span> ,<span class="va">initial_state</span>, <span class="va">center</span>,<span class="va">sigma</span>, <span class="va">person_effect</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="validation-compare-with-raw-data">Validation (compare with raw data)<a class="anchor" aria-label="anchor" href="#validation-compare-with-raw-data"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#violin_plot(sim_data, preg_data,relative=TRUE)</span></span>
+<span><span class="fu"><a href="../reference/heat_map.html">heat_map</a></span><span class="op">(</span><span class="va">sim_data</span>, <span class="va">preg_data</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Casestudy_files/figure-html/unnamed-chunk-3-1.png" width="700"><img src="Casestudy_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#specieswise_plot(sim_data, preg_data, TRUE)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="power-test">Power Test<a class="anchor" aria-label="anchor" href="#power-test"></a>
+</h3>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
