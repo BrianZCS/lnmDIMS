@@ -4,12 +4,12 @@
 \alias{heat_map}
 \title{Compare simulated with real data through heatmap}
 \usage{
-heat_map(sim_data, obs_data, relative_abundance, log_transform)
+heat_map(sim_data, obs_data, relative = FALSE, log_transform = FALSE)
 }
 \arguments{
 \item{sim_data}{simulated data}
 
-\item{relative_abundance}{compare the relative_abundance or not}
+\item{relative}{compare the relative_abundance or not}
 
 \item{log_transform}{log transfrom or not}
 

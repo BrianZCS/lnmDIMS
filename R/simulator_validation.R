@@ -4,7 +4,7 @@
 #' @param matrix microbiome abundance data
 #' @return return the relative abundance
 #' @export
-relative_abundence = function(matrix){
+relative_abundance = function(matrix){
   for(i in 1:nrow(matrix)){
     matrix[i,] = matrix[i,]/sum(matrix[i,])
   }
@@ -16,10 +16,10 @@ relative_abundence = function(matrix){
 #' Violin plot to compare the mean and variance of simulated and real data.
 #' @param sim_data simulated data
 #' @param obs_datas observed data
-#' @param relative_abundance compare the relative_abundance or not
+#' @param relative compare the relative_abundance or not
 #' @export
-violin_plot<-function(sim_data, obs_data, relative_abundance){
-  if (relative_abudance == TRUE){
+violin_plot<-function(sim_data, obs_data, relative = FALSE){
+  if (relative == TRUE){
     sim_data = relative_abundance(sim_data)
     obs_data = relative_abundance(obs_data)
   }
@@ -48,11 +48,11 @@ violin_plot<-function(sim_data, obs_data, relative_abundance){
 #' heatmap to compare the structure and abundance of simulated and real data.
 #' @param sim_data simulated data
 #' @param obs_datas observed data
-#' @param relative_abundance compare the relative_abundance or not
+#' @param relative compare the relative_abundance or not
 #' @param log_transform log transfrom or not
 #' @export
-heat_map<-function(sim_data, obs_data, relative_abundance, log_transform){
-  if (relative_abudance == TRUE){
+heat_map<-function(sim_data, obs_data, relative = FALSE, log_transform = FALSE){
+  if (relative == TRUE){
     sim_data = relative_abundance(sim_data)
     obs_data = relative_abundance(obs_data)
   }
@@ -71,10 +71,10 @@ heat_map<-function(sim_data, obs_data, relative_abundance, log_transform){
 #' species-wise scatter plot to compare the abundance of simulated and real data.
 #' @param sim_data simulated data
 #' @param obs_datas observed data
-#' @param relative_abundance compare the relative_abundance or not
+#' @param relative compare the relative_abundance or not
 #' @export
-specieswise_plot<-function(sim_data,obs_data,relative_abundance){
-  if (relative_abudance == TRUE){
+specieswise_plot<-function(sim_data,obs_data,relative = FALSE){
+  if (relative == TRUE){
     sim_data = relative_abundance(sim_data)
     obs_data = relative_abundance(obs_data)
   }

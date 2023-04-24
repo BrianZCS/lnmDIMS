@@ -4,12 +4,12 @@
 \alias{specieswise_plot}
 \title{Compare simulated with real data}
 \usage{
-specieswise_plot(sim_data, obs_data, relative_abundance)
+specieswise_plot(sim_data, obs_data, relative = FALSE)
 }
 \arguments{
 \item{sim_data}{simulated data}
 
-\item{relative_abundance}{compare the relative_abundance or not}
+\item{relative}{compare the relative_abundance or not}
 
 \item{obs_datas}{observed data}
 }
