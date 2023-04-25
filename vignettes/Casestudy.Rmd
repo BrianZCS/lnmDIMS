@@ -1,8 +1,8 @@
 ---
-title: "Mutinomial Model Case Study"
+title: "Multinomial Model Case Study"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Mutinomial Model Case Study}
+  %\VignetteIndexEntry{Multinomial Model Case Study}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -78,9 +78,9 @@ sim_data = sim_clust_multinomial(n_depth = as.vector(rowSums(preg_data)), n_spec
 
 ### Validation (compare with raw data)
 ```{r}
-#violin_plot(sim_data, preg_data,relative=TRUE)
+violin_plot(sim_data, preg_data,relative=TRUE)
 heat_map(sim_data, preg_data, TRUE, TRUE)
-#specieswise_plot(sim_data, preg_data, TRUE)
+specieswise_plot(sim_data, preg_data, TRUE)
 ```
 
 ### Power Test

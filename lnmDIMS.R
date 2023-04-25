@@ -15,3 +15,8 @@ build_site("lnmDIMS")
 
 #use_vignette("~/lnmDIMS")
 build_vignettes()
+
+## build reference
+## Then I can add function to different catogories
+
+## daft for plotting the diagram

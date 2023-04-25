@@ -80,7 +80,7 @@ specieswise_plot<-function(sim_data,obs_data,relative = FALSE){
   }
   sim.vs.real<-data.frame("species"=rep(1:ncol(sim_data), nrow(sim_data)), "sim"=c(log(1+t(sim_data))), "real"=c(log(1+t(obs_data))))
   ggplot(sim.vs.real)+
-    geom_point(aes(sim_data, obs_data), alpha = 0.3)+
+    geom_point(aes(sim, real), alpha = 0.3)+
     facet_wrap(~species, scales = "free_y")+
     geom_abline()
 }

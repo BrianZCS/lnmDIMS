@@ -1,8 +1,8 @@
 ---
-title: "Mutinomial Model Power Test"
+title: "Multinomial Model Power Test"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Mutinomial Model Power Test}
+  %\VignetteIndexEntry{Multinomial Model Power Test}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,7 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  cache = TRUE
 )
 ```
 
